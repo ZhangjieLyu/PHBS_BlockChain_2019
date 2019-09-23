@@ -42,37 +42,37 @@ public class TxHandler {
         // IMPLEMENT THIS
         int i = 0; //index
         double inputSum = 0; //coinValue input
+        double outputSum = 0; //coinValue output
+        //This set is used to ensure one UTXO can only be used once in a transaction.
         Set<UTXO> spentUtxo = new HashSet<UTXO>(); //spent transaction outputs, avoid repeats
 
-        // for loop, to go through all inputs
-        // don't care output's pubKey
+        // for loop, to go through all inputs in one Tx
         for (Transaction.Input input : tx.getInputs()) {
             UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
 
-            // verify the transaction has not been executed and
-            // whether the transaction is in the utxo pool.
-            if (spentUtxo.contains(utxo)) {
-                return false;
-            }
-
-            spentUtxo.add(utxo);
-
+            // (1)all outputs claimed by {@code tx} are in the current UTXO pool
             if (!utxoPool.contains(utxo)) {
                 return false;
-//                return true;
             }
 
-            // verify the signature
+            //(2)the signatures on each input of {@code tx} are valid
             if (!Crypto.verifySignature(utxoPool.getTxOutput(utxo).address, tx.getRawDataToSign(i), input.signature)) {
                 return false;
             }
 
+            // (3)no UTXO is claimed multiple times by {@code tx}
+            if (spentUtxo.contains(utxo)) {
+                return false;
+            }
+            spentUtxo.add(utxo);
+
+            // calculate total input(inputSum)
             inputSum += utxoPool.getTxOutput(utxo).value;
             i++;
         }
 
-        double outputSum = 0;
-        // get sum of the total transaction output(check owner's amount of coins claimed by prevTx)
+        // (4) all of {@code tx}s output values are non-negative, and
+        // (5) the sum of {@code tx}s input values is greater than or equal to the sum of its output value
         for (Transaction.Output output : tx.getOutputs()) {
             if (output.value < 0) {
                 return false;
@@ -97,39 +97,39 @@ public class TxHandler {
      */
     public Transaction[] handleTxs(Transaction[] possibleTxs) {
         // IMPLEMENT THIS
-        Set<Transaction> acceptedTx = new HashSet<Transaction>();
+        Set<Transaction> acceptedTx_epoch = new HashSet<Transaction>();
         Set<Transaction> invalidTx = new HashSet<Transaction>();
-        Set<Transaction> acceptedTx_copy = new HashSet<Transaction>();
+        Set<Transaction> acceptedTx_OneLoopOnly = new HashSet<Transaction>();
 
         //go through the array of possible Txs.
         for (Transaction tx : possibleTxs) {
             if (isValidTx(tx)) {
-                DealValidTx(acceptedTx, acceptedTx_copy, tx);
+                DealValidTx(acceptedTx_epoch, acceptedTx_OneLoopOnly, tx);
             } else {
                 invalidTx.add(tx);
             }
         }
 //        System.out.println("4.UTXO pool size: "+utxoPool.getAllUTXO().size());
-        while(!acceptedTx_copy.isEmpty()) {
-            acceptedTx_copy.clear();
+        while(!acceptedTx_OneLoopOnly.isEmpty()) {
+            acceptedTx_OneLoopOnly.clear(); // ensure no dead loop.
             for(Transaction invalid_tx: invalidTx) {
                 if(isValidTx(invalid_tx)) {
-                    DealValidTx(acceptedTx, acceptedTx_copy, invalid_tx);
+                    DealValidTx(acceptedTx_epoch, acceptedTx_OneLoopOnly, invalid_tx);
                 }
             }
-            invalidTx.removeAll(acceptedTx_copy);
+            invalidTx.removeAll(acceptedTx_OneLoopOnly);
         }
 //        System.out.println("5.UTXO pool size: "+utxoPool.getAllUTXO().size());
 
         // fix the size of transactions
 //        System.out.println("tx size is:" +acceptedTx.toArray(new Transaction[acceptedTx.size()]).length);
-        Transaction[] Arr_acceptedTx = acceptedTx.toArray(new Transaction[acceptedTx.size()]);
+        Transaction[] Arr_acceptedTx = acceptedTx_epoch.toArray(new Transaction[acceptedTx_epoch.size()]);
 //        System.out.println("6.UTXO pool size: " + utxoPool.getAllUTXO().size());
 
         return Arr_acceptedTx;
     }
 
-        public void DealValidTx(Set<Transaction> acceptedTx, Set<Transaction> acceptedTx_copy,Transaction tx){
+        public void DealValidTx(Set<Transaction> acceptedTx_epoch, Set<Transaction> acceptedTx_OneLoopOnly,Transaction tx){
             for (Transaction.Input oneDeal : tx.getInputs()) {
                 // check inputs in transaction, remove them from UTXOPool
                 UTXO possibleDeal = new UTXO(oneDeal.prevTxHash, oneDeal.outputIndex);
@@ -148,8 +148,8 @@ public class TxHandler {
                 utxoPool.addUTXO(utxo, outputs.get(i));
 //                System.out.println("3.UTXO pool size: "+utxoPool.getAllUTXO().size());
             }
-            acceptedTx_copy.add(tx);
-            acceptedTx.add(tx);
+            acceptedTx_OneLoopOnly.add(tx);
+            acceptedTx_epoch.add(tx);
 
         }
 }
