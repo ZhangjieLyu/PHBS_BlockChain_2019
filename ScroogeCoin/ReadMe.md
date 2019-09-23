@@ -254,5 +254,5 @@ assertTrue("tx1,2,3,4:Two UTXO's are left", utxoPool.getAllUTXO().size() == 3);
 
 *All test cases passed.*
 
-![TestResult](\TestResult.jpg)
+![TestResult](./TestResult.jpg)
 
