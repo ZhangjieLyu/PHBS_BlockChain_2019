@@ -22,17 +22,17 @@ assertTrue("tx1:Four invalid transaction", txHandler.handleTxs(new Transaction[]
 
 **Table of Contents**
 
-[1.A Valid Transaction](#1.A-Valid-Transaction)
+[1.A Valid Transaction](#1-.-A-Valid-Transaction)
 
-[2.Double-spending](#2.Double-spending)
+[2.Double-spending](#2-.-Double-spending)
 
-[3.Transaction not in UTXO](#3.Transaction-not-in-UTXO)
+[3.Transaction not in UTXO](#3-.-Transaction-not-in-UTXO)
 
-[4.Invalid signature](#4.Invalid-signature)
+[4.Invalid signature](#4-.-Invalid-signature)
 
-[5.Invalid output number](#5.Invalid-output-number)
+[5.Invalid output number](#5-.-Invalid-output-number)
 
-[6.Process an unordered array of transactions in one time](#6.Process-an-unordered-array-in-one-time)
+[6.Process an unordered array of transactions in one time](#6-.-Process-an-unordered-array-in-one-time)
 
 
 
@@ -54,7 +54,7 @@ tx1: Scrooge --> Scrooge 4coins  [Divide Coins]
      Scrooge --> Scrooge 5coins
      Scrooge --> Scrooge 6coins  
 tx2: Scrooge --> Alice   4coins  [Pay seperately]
-	 Scrooge --> Alice   5coins
+     Scrooge --> Alice   5coins
      Scrooge --> Bob     6coins
 tx3: Alice --> Alice     2coins  [Divide Coins]
      Alice --> Alice     2coins
@@ -254,5 +254,5 @@ assertTrue("tx1,2,3,4:Two UTXO's are left", utxoPool.getAllUTXO().size() == 3);
 
 *All test cases passed.*
 
-![TestResult](C:\Users\91592\Dropbox\Github\T_cell_staging\PHBS_BlockChain_2019\ScroogeCoin\TestResult.jpg)
+![TestResult](./TestResult.jpg)
 
