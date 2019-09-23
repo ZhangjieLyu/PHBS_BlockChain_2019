@@ -8,8 +8,8 @@ import java.security.SignatureException;
 import java.util.Arrays;
 
 /**
- * Because I forget to warp a function to process common parts of codes,
- * the codes is a little bit long... Sorry for that.
+ * Because I forget to wrap a function to process shared parts of codes,
+ * the code is a little bit long... Sorry for that.
  */
 public class TestMain {
     @Test
@@ -59,6 +59,8 @@ public class TestMain {
         System.out.println("txHandler.isValidTx(tx1) returns: " + txHandler.isValidTx(tx1));
 
         assertTrue("tx1:One valid transaction", txHandler.handleTxs(new Transaction[]{tx1}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx1:Three UTXO's are created", utxoPool.getAllUTXO().size() == 3);
 
         // tx2: Scrooge --> Alice   4coins  [Pay separately]
@@ -80,6 +82,8 @@ public class TestMain {
         txHandler = new TxHandler(utxoPool);
         System.out.println("txHandler.isValidTx(tx2) returns: " + txHandler.isValidTx(tx2));
         assertTrue("tx2:One valid transaction", txHandler.handleTxs(new Transaction[]{tx2}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx2:Three UTXO's are created", utxoPool.getAllUTXO().size() == 3);
 
         // tx3:Alice --> Alice     2coins  [Divide Coins]
@@ -96,6 +100,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx3) returns: " + txHandler.isValidTx(tx3));
         assertTrue("tx3:One valid transaction", txHandler.handleTxs(new Transaction[]{tx3}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx3:Two UTXO's are created", utxoPool.getAllUTXO().size() == 4);
 
         // tx4: Alice --> Bob       2coins  [Pay jointly]
@@ -114,6 +120,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx4) returns: " + txHandler.isValidTx(tx4));
         assertTrue("tx4:One valid transaction", txHandler.handleTxs(new Transaction[]{tx4}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx4:Two UTXO's are created", utxoPool.getAllUTXO().size() == 3);
 
         System.out.println("tx1.hashCode returns: " + tx1.hashCode());
@@ -154,6 +162,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx1) returns: " + txHandler.isValidTx(tx1));
         assertTrue("tx1:One valid transaction", txHandler.handleTxs(new Transaction[]{tx1}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx1: one UTXO's created.", utxoPool.getAllUTXO().size() == 1);
 
        // tx 2:Scrooge --> Bob     20coins [*Double-spending*]
@@ -165,6 +175,8 @@ public class TestMain {
         txHandler = new TxHandler(utxoPool);
         System.out.println("txHandler.isValidTx(tx2) returns: " + txHandler.isValidTx(tx2));
         assertTrue("tx2:no valid transaction", txHandler.handleTxs(new Transaction[]{tx2}).length == 0);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx2:no UTXO's created.", utxoPool.getAllUTXO().size() == 1);
 
         System.out.println("tx1.hashCode returns: " + tx1.hashCode());
@@ -205,6 +217,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx1) returns: " + txHandler.isValidTx(tx1));
         assertTrue("tx1:add one valid transaction", txHandler.handleTxs(new Transaction[]{tx1}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx1:one UTXO's created.", utxoPool.getAllUTXO().size() == 1);
 
         // tx2: Alice --> Bob       -5coins [*Invalid output number*]
@@ -217,6 +231,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx2) returns: " + txHandler.isValidTx(tx2));
         assertTrue("tx2:add one invalid transaction", txHandler.handleTxs(new Transaction[]{tx2}).length == 0);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx2:one UTXO's remained", utxoPool.getAllUTXO().size() == 1);
 
         // tx3: Alice --> Bob       90coins [*Invalid output number*]
@@ -229,6 +245,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx3) returns: " + txHandler.isValidTx(tx3));
         assertTrue("tx3:add one invalid transaction", txHandler.handleTxs(new Transaction[]{tx3}).length == 0);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx3:one UTXO's remained", utxoPool.getAllUTXO().size() == 1);
 
         System.out.println("tx1.hashCode returns: " + tx1.hashCode());
@@ -269,6 +287,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx1) returns: " + txHandler.isValidTx(tx1));
         assertTrue("tx1:add one valid transaction", txHandler.handleTxs(new Transaction[]{tx1}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx1:one UTXO's created.", utxoPool.getAllUTXO().size() == 1);
 
         // tx2: alice to bob 20coins[signed by bob]
@@ -281,6 +301,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx2) returns: " + txHandler.isValidTx(tx2));
         assertTrue("tx2:add one invalid transaction", txHandler.handleTxs(new Transaction[]{tx2}).length == 0);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx2:one UTXO's remained.", utxoPool.getAllUTXO().size() == 1);
 
         System.out.println("tx1.hashCode returns: " + tx1.hashCode());
@@ -320,6 +342,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx1) returns: " + txHandler.isValidTx(tx1));
         assertTrue("tx1:no valid transaction", txHandler.handleTxs(new Transaction[]{tx1}).length == 1);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         utxoPool.removeUTXO(utxo);
         assertTrue("tx1:UTXO has been removed.", utxoPool.getAllUTXO().size() == 0);
 
@@ -332,6 +356,8 @@ public class TestMain {
 
         System.out.println("txHandler.isValidTx(tx2) returns: " + txHandler.isValidTx(tx2));
         assertTrue("tx2:no valid transaction", txHandler.handleTxs(new Transaction[]{tx2}).length == 0);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx2:no UTXO's created.", utxoPool.getAllUTXO().size() == 0);
 
     }
@@ -407,6 +433,8 @@ public class TestMain {
         TxHandler txHandler = new TxHandler(utxoPool);
 
         assertTrue("tx1,2,3,4: four valid transaction", txHandler.handleTxs(new Transaction[]{tx1,tx2,tx3,tx4}).length == 4);
+        // update utxo pool
+        utxoPool = txHandler.getHandledUtxoPool();
         assertTrue("tx1,2,3,4:Two UTXO's are left", utxoPool.getAllUTXO().size() == 3);
 
         System.out.println("tx1.hashCode returns: " + tx1.hashCode());

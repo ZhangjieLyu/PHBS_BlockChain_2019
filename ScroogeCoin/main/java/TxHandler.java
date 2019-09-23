@@ -13,9 +13,16 @@ public class TxHandler {
 
     public TxHandler(UTXOPool utxoPool) {
         // IMPLEMENT THIS
-//        this.utxoPool = new UTXOPool(utxoPool);
-        this.utxoPool = utxoPool;
+        this.utxoPool = new UTXOPool(utxoPool);
+    }
 
+    /**
+     * @return UTXO Pool:
+     * Since A defensive copy cannot be visited outside the class
+     * This method is used to get UTXO pool after TxHandling.
+     */
+    public UTXOPool getHandledUtxoPool(){
+        return this.utxoPool;
     }
 
 
