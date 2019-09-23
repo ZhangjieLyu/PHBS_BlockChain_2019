@@ -254,5 +254,5 @@ assertTrue("tx1,2,3,4:Two UTXO's are left", utxoPool.getAllUTXO().size() == 3);
 
 *All test cases passed.*
 
-![TestResult](C:\Users\91592\Dropbox\Github\T_cell_staging\PHBS_BlockChain_2019\ScroogeCoin\TestResult.jpg)
+![TestResult](\TestResult.jpg)
 
