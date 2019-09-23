@@ -228,7 +228,7 @@ tx1: Scrooge --> Scrooge 4coins  [Divide Coins]
      Scrooge --> Scrooge 5coins
      Scrooge --> Scrooge 6coins  
 tx2: Scrooge --> Alice   4coins  [Pay seperately]
-	 Scrooge --> Alice   5coins
+     Scrooge --> Alice   5coins
      Scrooge --> Bob     6coins
 tx3: Alice --> Alice     2coins  [Divide Coins]
      Alice --> Alice     2coins
@@ -245,7 +245,7 @@ return their transaction hash code.
 ```java
 assertTrue("tx1,2,3,4: four valid transaction", txHandler.handleTxs(new Transaction[]{tx1,tx2,tx3,tx4}).length == 4);
 
-assertTrue("tx1,2,3,4:Two UTXO's are left", utxoPool.getAllUTXO().size() == 3);
+assertTrue("tx1,2,3,4:Three UTXO's are left", utxoPool.getAllUTXO().size() == 3);
 ```
 
 
