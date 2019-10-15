@@ -37,3 +37,10 @@ public class BlockNode{
 }
 ```
 
+When block chain are constructed, they're connected with *BlockNode* object, thus, it must been ensured that *parentNode.block.getHash()* is equal to *prevBlockHash*; and all *Transaction* object in *ArrayList<Transaction>* are valid, this is realized by the *TxHandler(UTXOPool)* class in **ScroogeCoin**.
+  
+Especially, when forking, the following rules are applied:
+1. Default adding block will be attached to the longest side branch;
+2. Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 10*;
+3. When a fork has same-length side branches, the longest side branch is the oldest one(here realized by BFS);
+4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes.
