@@ -43,4 +43,19 @@ Especially, when forking, the following rules are applied:
 1. Default adding block will be attached to the longest side branch;
 2. Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 10*;
 3. When a fork has same-length side branches, the longest side branch is the oldest one(here realized by BFS);
-4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes.
+4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes;
+5. Only one genesis block(means previous block's hash is *null*) can exist in one block chain.
+
+## Test cases and explanation
+In test cases, to make life simple, "Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 2*;".
+
+Since different situations of corrupted transactions have been discussed in **ScroogeCoin**'s test cases, here they won't be discussed. Additionally, to make each test case clarify themselves, the following result are printed, including:
+1. Hash of block existing in block chain are printed;
+2. Hash of all intended block(no matter add successfully or not) are printed;
+3. To show whether transaction pool works or not, examples are introduced, but the hash of transations in transaction pool won't always be printed out;
+4. If the test case is about UTXO pool, UTXO pool will be presented.
+
+### Test case 1
+**A common block chain**
+
+
