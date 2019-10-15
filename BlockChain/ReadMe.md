@@ -42,7 +42,7 @@ When block chain are constructed, they're connected with *BlockNode* object, thu
 Especially, when forking, the following rules are applied:
 1. Default adding block will be attached to the longest side branch;
 2. Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 10*;
-3. When a fork has same-length side branches, the longest side branch is the oldest one(here realized by DFS);
+3. When a fork has same-length side branches, the longest side branch is the oldest one(here realized by BFS);
 4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes;
 5. Only one genesis block(means previous block's hash is *null*) can exist in one block chain.
 
