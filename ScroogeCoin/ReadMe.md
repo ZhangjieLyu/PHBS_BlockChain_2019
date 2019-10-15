@@ -22,17 +22,17 @@ assertTrue("tx1:Four invalid transaction", txHandler.handleTxs(new Transaction[]
 
 **Table of Contents**
 
-[1.A Valid Transaction](#1-.-A-Valid-Transaction)
+[1.A Valid Transaction](#1.A-Valid-Transaction)
 
-[2.Double-spending](#2-.-Double-spending)
+[2.Double-spending](#2.Double-spending)
 
-[3.Transaction not in UTXO](#3-.-Transaction-not-in-UTXO)
+[3.Transaction not in UTXO](#3.Transaction-not-in-UTXO)
 
-[4.Invalid signature](#4-.-Invalid-signature)
+[4.Invalid signature](#4.Invalid-signature)
 
-[5.Invalid output number](#5-.-Invalid-output-number)
+[5.Invalid output number](#5.Invalid-output-number)
 
-[6.Process an unordered array of transactions in one time](#6-.-Process-an-unordered-array-in-one-time)
+[6.Process an unordered array of transactions in one time](#6.Process-an-unordered-array-in-one-time)
 
 
 
