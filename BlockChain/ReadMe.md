@@ -41,6 +41,7 @@ When block chain are constructed, they're connected with *BlockNode* object, thu
 
 Common rules here is different that of Bitcoin's block chain, including:
 1. COINBASE can be used immediately in the next valid block;
+2. Can not specify *Tx* to be included in a block, all valid transactions will be included in the most recent available block.
 
 Especially, when forking, the following rules are applied:
 1. Default adding block will be attached to the longest side branch;
@@ -61,9 +62,8 @@ Since different situations of corrupted transactions have been discussed in **Sc
 ### 2.1.How to create a new block
 There're 3 ways to create a valid block, they are:
 
-#### 2.1.1.Automactic Forking without Clarifying Txs
-#### 2.2.2.Automatic Forking with Clarifying Txs
-#### 2.1.3.Manual Forking
+#### 2.1.1.Automactic Forking 
+#### 2.1.2.Manual Forking
 A manucal forking is a extended
 
 ### Test case 1
