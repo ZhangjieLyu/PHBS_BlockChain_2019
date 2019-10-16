@@ -1,7 +1,7 @@
 # Block Chain
 This assignment is to build a petty blcok chain, where no actual distributed consensus mechanism is introduced(though simulated).      There will be 2 parts, the 1st part is about how this petty block chain works while the 2nd part is about the test cases and corresponding explanation.
 
-## Mechanism
+## 1.Mechanism
 The block chain in this assignment is organized in a tree, every block is enclosed in a node and transations in each node is stored in a list instead of a Merkle tree. To be specific, each block and its block node contains following components:
 
 ```java
@@ -38,7 +38,10 @@ public class BlockNode{
 ```
 
 When block chain are constructed, they're connected with *BlockNode* object, thus, it must been ensured that *parentNode.block.getHash()* is equal to *prevBlockHash*; and all *Transaction* object in *ArrayList<Transaction>* are valid, this is realized by the *TxHandler(UTXOPool)* class in **ScroogeCoin**.
-  
+
+Common rules here is different that of Bitcoin's block chain, including:
+1. COINBASE can be used immediately in the next valid block;
+
 Especially, when forking, the following rules are applied:
 1. Default adding block will be attached to the longest side branch;
 2. Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 10*;
@@ -46,7 +49,7 @@ Especially, when forking, the following rules are applied:
 4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes;
 5. Only one genesis block(means previous block's hash is *null*) can exist in one block chain.
 
-## Test cases and explanation
+## 2.Test cases and explanation
 In test cases, to make life simple, "Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 2*;".
 
 Since different situations of corrupted transactions have been discussed in **ScroogeCoin**'s test cases, here they won't be discussed. Additionally, to make each test case clarify themselves, the following result are printed, including:
@@ -54,6 +57,14 @@ Since different situations of corrupted transactions have been discussed in **Sc
 2. Hash of all intended block(no matter add successfully or not) are printed;
 3. To show whether transaction pool works or not, examples are introduced, but the hash of transations in transaction pool won't always be printed out;
 4. If the test case is about UTXO pool, UTXO pool will be presented.
+
+### 2.1.How to create a new block
+There're 3 ways to create a valid block, they are:
+
+#### 2.1.1.Automactic Forking without Clarifying Txs
+#### 2.2.2.Automatic Forking with Clarifying Txs
+#### 2.1.3.Manual Forking
+A manucal forking is a extended
 
 ### Test case 1
 **A common block chain**
