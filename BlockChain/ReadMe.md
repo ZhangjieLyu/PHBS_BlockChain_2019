@@ -59,14 +59,20 @@ Since different situations of corrupted transactions have been discussed in **Sc
 3. To show whether transaction pool works or not, examples are introduced, but the hash of transations in transaction pool won't always be printed out;
 4. If the test case is about UTXO pool, UTXO pool will be presented.
 
-### 2.1.How to create a new block
-There're 3 ways to create a valid block, they are:
+### How to create a new block
+There're 2 ways to create a valid block, they are:
+**Automactic Forking**: create a new block attached to the leaf node of the longest side branch;
+**Manual Forking**: create a new block not attached to the leaf node of the longest side branch.
 
-#### 2.1.1.Automactic Forking 
-#### 2.1.2.Manual Forking
-A manucal forking is a extended
 
 ### Test case 1
 **A common block chain**
-
+```R
+Outputs,
+for each block, print the following attributes:
+1. The height of the block;
+2. The hash code of the block;
+3. The #Txs in the global Tx pool;
+4. The #UTXOs in the block's utxo Pool.
+```
 
