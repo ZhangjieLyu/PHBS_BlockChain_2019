@@ -37,7 +37,7 @@ public class BlockNode{
 }
 ```
 
-When block chain are constructed, they're connected with *BlockNode* object, thus, it must been ensured that *parentNode.block.getHash()* is equal to *prevBlockHash*; and all *Transaction* object in *ArrayList<Transaction>* are valid, this is realized by the *TxHandler(UTXOPool)* class in **ScroogeCoin**.
+When block chain are constructed, they're connected with *BlockNode* object, thus, it must been ensured that ```parentNode.block.getHash()``` is equal to ```prevBlockHash```; and all ```Transaction``` object in ```ArrayList<Transaction>``` are valid, this is realized by the ```TxHandler(UTXOPool)``` class in **ScroogeCoin**.
 
 Common rules here is different that of Bitcoin's block chain, including:
 1. COINBASE can be used immediately in the next valid block;
@@ -61,8 +61,10 @@ Since different situations of corrupted transactions have been discussed in **Sc
 
 ### How to create a new block
 There're 2 ways to create a valid block, they are:
-**Automactic Forking**: create a new block attached to the leaf node of the longest side branch, transactions can either be collected from transaction pool(```java  BlockHandler.createBlock```) or be collected from the block's transaction array list(```java BlockHandler.processBlock```);
-**Manual Forking**: create a new block not attached to the leaf node of the longest side branch, similarily, 2 methods ```java BlockHandler.createBlockManualFork```,```java BlockHandler.processBlockManualFork``` are provided.
+
+**Automactic Forking**: create a new block attached to the leaf node of the longest side branch, transactions can either be collected from transaction pool(``` BlockHandler.createBlock```) or be collected from the block's transaction array list(```BlockHandler.processBlock```);
+
+**Manual Forking**: create a new block not attached to the leaf node of the longest side branch, similarily, 2 methods ```BlockHandler.createBlockManualFork```,```BlockHandler.processBlockManualFork``` are provided.
 
 Outputs will include:
 ```java
@@ -76,6 +78,7 @@ for each block, print the following attributes:
 
 ### Test case 1
 **A valid block chain**
+
 Description: the following feature will be verified in this test case:
 1. The block chain can produce forks when these forks are legal;
 2. Coinbase transaction can be consumed in the next coming block;
@@ -89,6 +92,7 @@ Result:
 
 ### Test case 2
 **Illegal coinbase**
+
 Description: 
 1. try to create a coinbase with wrong coinbase number; since other invalid transactions has been tested in the **ScroogeCoin**, they won't be tested again here; 
 2. create a block with null transaction attached(this is a valid action).
@@ -96,5 +100,6 @@ Description:
 
 ### Test case 3
 **Illegal manual fork**
+
 Description: try to create a fork on the block whose height is smaller than *maxHeight - CUT_OFF_AGE*
 
