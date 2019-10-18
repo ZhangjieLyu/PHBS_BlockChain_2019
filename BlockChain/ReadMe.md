@@ -61,18 +61,40 @@ Since different situations of corrupted transactions have been discussed in **Sc
 
 ### How to create a new block
 There're 2 ways to create a valid block, they are:
-**Automactic Forking**: create a new block attached to the leaf node of the longest side branch;
-**Manual Forking**: create a new block not attached to the leaf node of the longest side branch.
+**Automactic Forking**: create a new block attached to the leaf node of the longest side branch, transactions can either be collected from transaction pool(```java  BlockHandler.createBlock```) or be collected from the block's transaction array list(```java BlockHandler.processBlock```);
+**Manual Forking**: create a new block not attached to the leaf node of the longest side branch, similarily, 2 methods ```java BlockHandler.createBlockManualFork```,```java BlockHandler.processBlockManualFork``` are provided.
 
-
-### Test case 1
-**A common block chain**
-```R
-Outputs,
+Outputs will include:
+```java
 for each block, print the following attributes:
+0. The number of child nodes of current node's parent node;
 1. The height of the block;
 2. The hash code of the block;
 3. The #Txs in the global Tx pool;
 4. The #UTXOs in the block's utxo Pool.
 ```
+
+### Test case 1
+**A valid block chain**
+Description: the following feature will be verified in this test case:
+1. The block chain can produce forks when these forks are legal;
+2. Coinbase transaction can be consumed in the next coming block;
+3. One can add valid block to valid position of the block chain with either **Automatic Forking** or **Manual Forking**.
+
+Test case description:
+
+Test case explanation:
+
+Result:
+
+### Test case 2
+**Illegal coinbase**
+Description: 
+1. try to create a coinbase with wrong coinbase number; since other invalid transactions has been tested in the **ScroogeCoin**, they won't be tested again here; 
+2. create a block with null transaction attached(this is a valid action).
+3. create a block trying to use current block's coinbase in current block.
+
+### Test case 3
+**Illegal manual fork**
+Description: try to create a fork on the block whose height is smaller than *maxHeight - CUT_OFF_AGE*
 
