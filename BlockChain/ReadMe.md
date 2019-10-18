@@ -129,7 +129,6 @@ Test case explanation:
    + 1 Coinbase transaction is added to ```BlockChain.globalTxPool```;(total is 1)
    + 1 ```UTXO``` is added to ```BlockNode.utxoPool```;(total is 1)
 2. Fork at the *genesis block 0*--*Block 1,**M*** and *Block 1,**B*** separately, test the structure of tree and test the Coinbase transaction can be used in both blocks; This is a **feature** in this design, ```BlockNode.utxoPool``` is stored independently in each block node, thus for both *Block 1,**M*** and *Block 1,**B***, Coinbase transaction of *genesis block 0* is available.
-3. Fork at the *block 2,**M*** , simulating the competence in real mining, suppose one branch achieves 2 more blocks and the longest chain switched.
 
 
 
