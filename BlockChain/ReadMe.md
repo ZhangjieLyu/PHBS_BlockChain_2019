@@ -121,7 +121,7 @@ Description: the following feature will be verified in this test case:
 
 Test case description:
 
-![testCase1_blockChain](C:\Users\91592\Dropbox\Github\T_cell_staging\PHBS_BlockChain_2019\BlockChain\testCase1_blockChain.png)
+![testCase1_blockChain](..\testCase1_blockChain.png)
 
 Test case explanation:
 
