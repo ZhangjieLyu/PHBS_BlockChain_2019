@@ -82,7 +82,8 @@ for each block, print the following attributes:
 Description: the following feature will be verified in this test case:
 1. The block chain can produce forks when these forks are legal;
 2. Coinbase transaction can be consumed in the next coming block;
-3. One can add valid block to valid position of the block chain with either **Automatic Forking** or **Manual Forking**.
+3. One can add valid block to valid positions of the block chain with either **Automatic Forking** or **Manual Forking**;
+4. The longest side branch can be selected automatically.
 
 Test case description:
 
