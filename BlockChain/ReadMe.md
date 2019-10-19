@@ -129,16 +129,12 @@ Test case explanation:
    + 1 Coinbase transaction is added to ```BlockChain.globalTxPool```;(total is 1)
    + 1 ```UTXO``` is added to ```BlockNode.utxoPool```;(total is 1)
 2. Fork at the *genesis block 0*--*Block 1,**M*** and *Block 1,**B*** separately, test the structure of tree and test the Coinbase transaction can be used in both blocks; This is a **feature** in this design, ```BlockNode.utxoPool``` is stored independently in each block node, thus for both *Block 1,**M*** and *Block 1,**B***, Coinbase transaction of *genesis block 0* is available.
-3. Forks at the *Block 2,**M***--the longest chain will switch to the middle branch(as figure shows) automatically.
-
-
 
 ### Test case 2
 **Illegal coinbase**
 
 Description: 
 1. try to create a coinbase with wrong coinbase number; since other invalid transactions has been tested in the **ScroogeCoin**, they won't be tested again here; 
-2. create a block with null transaction attached(this is a valid action).
 3. create a block trying to use current block's coinbase in current block.
 
 ### Test case 3
