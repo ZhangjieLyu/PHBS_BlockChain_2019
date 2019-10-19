@@ -9,13 +9,13 @@ This assignment is to build a petty blcok chain, where no actual distributed con
 
 [Init a new block](#How-to-create-a-new-block)
 
-[Create a block chain(codes)](#How-petty-block-chain-are-realized(Code-fashion))
+[Create a block chain(codes)](#How-petty-block-chain-are-realized-Code---fashion)
 
 [Store a clip of block chain](#Avoid-overflow)
 
-[Outputs example in test case](#Outputs-(each-block)-in-test-case)
+[Outputs example in test case](#Outputs-each-block-in-test-case)
 
-[Test case: A valid block chain and store limited length of block chain](#Test_case_1)
+[Test case: A valid block chain and store limited length of block chain](#Test-case-1)
 
 [Test case: illegal coinbase](#Test-case-2)
 
@@ -97,7 +97,7 @@ There're 2 ways to create a valid block, they are:
 
 **Manual Forking**: create a new block not attached to the leaf node of the longest side branch, similarly, 2 methods ```BlockHandler.createBlockManualFork```,```BlockHandler.processBlockManualFork``` are provided.
 
-### How petty block chain are realized(Code-fashion)
+### How petty block chain are realized Code-fashion
 
 The following ways are used to create a test case:
 
@@ -141,7 +141,7 @@ public class BlockChainClip {
 ```
 
 
-### Outputs(each block) in test case
+### Outputs each block in test case
 
 Outputs will include:
 
