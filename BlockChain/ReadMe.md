@@ -111,7 +111,7 @@ for each block, print the following attributes:
 
 ### Test case 1
 
-**A valid block chain**
+**A valid block chain and store limited length of block chain**
 
 Description: the following feature will be verified in this test case:
 1. The block chain can produce forks when these forks are legal;
@@ -129,6 +129,7 @@ Test case explanation:
    + 1 Coinbase transaction is added to ```BlockChain.globalTxPool```;(total is 1)
    + 1 ```UTXO``` is added to ```BlockNode.utxoPool```;(total is 1)
 2. Fork at the *genesis block 0*--*Block 1,**M*** and *Block 1,**B*** separately, test the structure of tree and test the Coinbase transaction can be used in both blocks; This is a **feature** in this design, ```BlockNode.utxoPool``` is stored independently in each block node, thus for both *Block 1,**M*** and *Block 1,**B***, Coinbase transaction of *genesis block 0* is available.
+3. A limited length of block chain is stored in a new object ```BlockChainClip```
 
 ### Test case 2
 **Illegal coinbase**
@@ -142,3 +143,11 @@ Description:
 
 Description: try to create a fork on the block whose height is smaller than *maxHeight - CUT_OFF_AGE*
 
+### Tets case 4
+**Illegal previous block hash**
+
+Description: 
+1. insert a new genesis block when there exists a genesis block in the block chain;
+2. incorrect previous hash when using automatic forking.
+
+### Results
