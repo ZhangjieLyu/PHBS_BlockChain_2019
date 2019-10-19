@@ -9,11 +9,11 @@ This assignment is to build a petty blcok chain, where no actual distributed con
 
 [Init a new block](#How-to-create-a-new-block)
 
-[Create a block chain(codes)](#How-petty-block-chain-are-realized-(-Code-fashion-))
+[Create a block chain(codes)](#How-petty-block-chain-are-realized(Code-fashion))
 
 [Store a clip of block chain](#Avoid-overflow)
 
-[Outputs example in test case](#Outputs-(-each-block-)-in-test-case)
+[Outputs example in test case](#Outputs-(each-block)-in-test-case)
 
 [Test case: A valid block chain and store limited length of block chain](#Test_case_1)
 
