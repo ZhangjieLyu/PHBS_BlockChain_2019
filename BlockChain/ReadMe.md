@@ -146,7 +146,7 @@ Test case explanation:
 **Illegal coinbase**
 
 Description: 
-1. try to create a coinbase with wrong coinbase number; since other invalid transactions has been tested in the **ScroogeCoin**, they won't be tested again here; 
+1. try to consume an excessed coinbase number; since other invalid transactions has been tested in the **ScroogeCoin**, they won't be tested again here; 
 3. create a block trying to use current block's coinbase in current block.
 
 ### Test case 3
