@@ -2,11 +2,12 @@
 This assignment is to build a petty blcok chain, where no actual distributed consensus mechanism is introduced(though simulated). There will be 2 parts, the 1st part is about how this petty block chain works while the 2nd part is about the test cases and corresponding explanation.
 
 **Content**
-[1.Mechanism](## 1.Mechanism)
-[2.Test case: A valid block chain and store limited length of block chain](### Test case 1)
-[3.Test case: illegal coinbase](### Test case 2)
-[4.Test case: illegal manual fork](### Test case 3)
-[5.Test case: illegal previous block hash](### Test case 4)
+[1.Mechanism](#1_._Mechanism)
+
+[2.Test case: A valid block chain and store limited length of block chain](#Test_case_1)
+[3.Test case: illegal coinbase](#Test_case_2)
+[4.Test case: illegal manual fork](#Test_case_3)
+[5.Test case: illegal previous block hash](#Test_case_4)
 
 ## 1.Mechanism
 The block chain in this assignment is organized in a tree, every block is enclosed in a node and transations in each node is stored in a list instead of a Merkle tree. To be specific, each block and its block node contains following components:
