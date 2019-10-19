@@ -152,7 +152,7 @@ Description:
 ### Test case 3
 **Illegal manual fork**
 
-Description: try to create a fork on the block whose height is smaller than *maxHeight - CUT_OFF_AGE*
+Description: try to create a fork on the block whose height is smaller than *maxHeight - CUT_OFF_AGE*,the CUT_OFF_AGE is reset to be 2 for convenience.
 
 ### Tets case 4
 **Illegal previous block hash**
