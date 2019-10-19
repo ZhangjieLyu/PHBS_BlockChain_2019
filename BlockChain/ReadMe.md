@@ -3,15 +3,25 @@ This assignment is to build a petty blcok chain, where no actual distributed con
 
 **Content**
 
-[1.Mechanism](#1-.-Mechanism)
+[Mechanism](#1-.-Mechanism)
 
-[2.Test case: A valid block chain and store limited length of block chain](#Test_case_1)
+[Init a new transaction](#How-to-init-a-new-transaction-for-a-block)
 
-[3.Test case: illegal coinbase](#Test-case-2)
+[Init a new block](#How-to-create-a-new-block)
 
-[4.Test case: illegal manual fork](#Test-case-3)
+[Create a block chain(codes)](#How-petty-block-chain-are-realized-(-Code-fashion-))
 
-[5.Test case: illegal previous block hash](#Test-case-4)
+[Store a clip of block chain](#Avoid-overflow)
+
+[Outputs example in test case](#Outputs-(-each-block-)-in-test-case)
+
+[Test case: A valid block chain and store limited length of block chain](#Test_case_1)
+
+[Test case: illegal coinbase](#Test-case-2)
+
+[Test case: illegal manual fork](#Test-case-3)
+
+[Test case: illegal previous block hash](#Test-case-4)
 
 ## 1.Mechanism
 The block chain in this assignment is organized in a tree, every block is enclosed in a node and transations in each node is stored in a list instead of a Merkle tree. To be specific, each block and its block node contains following components:
@@ -62,7 +72,7 @@ Especially, when forking, the following rules are applied:
 4. Since only one global transaction pool is maintained, thus forking may produce irreversable changes;
 5. Only one genesis block(means previous block's hash is *null*) can exist in one block chain.
 
-## 2.Test cases and explanation
+## 2.Test cases and further explanation
 In test cases, to make life simple, "Manual forking allows users to make a new fork appended to any block whose height is not smaller than *height of current longest side branch - 2*;".
 
 Since different situations of corrupted transactions have been discussed in **ScroogeCoin**'s test cases, here they won't be discussed. Additionally, to make each test case clarify themselves, the following result are printed, including:
@@ -108,7 +118,30 @@ blockPetty.finalize(); // init block's hash
 blockHandler.processBlockManualFork(Block:blockPetty,int goBackHeight);
 ```
 
-### Outputs(each block) in test case:
+### Avoid overflow
+Use a special ```BlockChainClip``` class to store a little part of the block chain:
+```java
+public class BlockChainClip {
+    //...
+    public BlockChainClip(BlockChain.BlockNode blockNode){
+        this.block = blockNode.getNode_block();
+        this.height = blockNode.getNode_height();
+        this.utxoPool = blockNode.getNode_UTXOPool();
+        this.parentNode = blockNode.getNode_parentNode();
+        this.childNodes = blockNode.getNode_childNodes();
+        this.blockNode = blockNode;
+    }
+
+    public void printBlockChainClip(){...}
+
+    private void printDFSSearch(BlockChain.BlockNode blockNode){...}
+        
+    //...
+}
+```
+
+
+### Outputs(each block) in test case
 
 Outputs will include:
 
@@ -128,7 +161,8 @@ Description: the following feature will be verified in this test case:
 1. The block chain can produce forks when these forks are legal;
 2. Coinbase transaction can be consumed in the next coming block;
 3. One can add valid block to valid positions of the block chain with either **Automatic Forking** or **Manual Forking**;
-4. The longest side branch can be selected automatically.
+4. The longest side branch can be selected automatically;
+5. Can only store a small part of the block chain to avoid overflow.
 
 Test case description:
 
