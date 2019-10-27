@@ -1,4 +1,6 @@
 # Block Chain
+@author: ZhangjieLyu
+
 This assignment is to build a petty blcok chain, where no actual distributed consensus mechanism is introduced(though simulated). There will be 2 parts, the 1st part is about how this petty block chain works while the 2nd part is about the test cases and corresponding explanation.
 
 **Content**
