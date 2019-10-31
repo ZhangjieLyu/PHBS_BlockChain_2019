@@ -6,6 +6,6 @@ For PHBS, Module 1
 2. Block Chain
 
 # Group Project
-Group members: Jiaxi Ren, Zhangjie Lyu
+**Group members**: Jiaxi Ren, Zhangjie Lyu
 
 **Topic:** Personal File for Public Usage via Block Chain Architecture.
