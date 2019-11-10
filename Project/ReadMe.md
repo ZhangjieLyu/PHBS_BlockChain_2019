@@ -8,6 +8,7 @@
 + What's existing problem?
 + Why block chain?
 + Design of block chain(architecture)
+
 **IMPORTANT: if you feel the text is too long here, please jump to the end for some figures :)**
 
 
@@ -82,11 +83,11 @@ Validator are responsible for checking transactions uploaded by users. Also the 
 Citizens. With the relatively lowest authority, can only send request to view authorized part of information.
 
 ### Example: record an event
-![Record an event](support_figures\example1.png)
+![Record an event](../support_figures/example1.png)
 
 
 ### Example: structure of roles' relationship
-![structure of roles' relationship](support_figures\example2.png)
+![structure of roles' relationship](../support_figures/example2.png)
 
 
 
